@@ -101,11 +101,12 @@ class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Eve
 ```
 
 ### Create a Calendar
-To create a calendar, in your route or controller, create your event(s), then pass them to `Calendar::addEvent()` or `Calendar::addEvents()` (to add an array of events). `addEvent()` and `addEvents()` can be used fluently (chained together). Their second parameter accepts an array of valid [FullCalendar Event Object parameters](http://fullcalendar.io/docs/event_data/Event_Object/).
+To create a calendar, in your route or controller, create your event(s), then pass them to `addEvent()` or `addEvents()` (to add an array of events) methods of Calendar . `addEvent()` and `addEvents()` can be used fluently (chained together). Their second parameter accepts an array of valid [FullCalendar Event Object parameters](http://fullcalendar.io/docs/event_data/Event_Object/).
 
 #### Sample Controller code:
 
 ```php
+
 $events = [];
 
 $events[] = Calendar::event(
@@ -124,7 +125,9 @@ $events[] = Calendar::event(
 
 $eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
 
-$calendar = Calendar::addEvents($events) //add an array with addEvents
+$calendar = new Calendar();
+
+$calendar->addEvents($events) //add an array with addEvents
     ->addEvent($eloquentEvent, [ //set custom color fo this event
         'color' => '#800',
     ])->setOptions([ //set fullcalendar options
